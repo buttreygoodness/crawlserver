@@ -32,5 +32,7 @@ var respond = function (req, res) {
   });
 }
 
+console.log('crawlserver listening on port ' + PORT);
+
 app.get(/(.*)/, respond);
 app.listen(PORT);
