@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.8.5"
+    "express": "^4.8.5",
+    "node-phantom": "^0.2.5"
   }
 }
