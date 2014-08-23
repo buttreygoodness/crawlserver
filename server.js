@@ -2,13 +2,16 @@ var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 8888;
 
-console.log('hello');
-
 var getContent = function(url, callback) {
   var content = '';
   // Here we spawn a phantom.js process, the first element of the 
   // array is our phantomjs script and the second element is our url 
   var phantom = require('child_process').spawn('phantomjs', ['phantom-server.js', url, '--load-images=false', '--disk-cache=true', 'local-storage-path=./cache']);
+  
+  phantom.stderr.on('data', function (data) {
+    console.log('phantom stderr: ', data);
+  });
+
   phantom.stdout.setEncoding('utf8');
   // Our phantom.js script is simply logging the output and
   // we access it here through stdout
