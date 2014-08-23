@@ -8,17 +8,17 @@ var requestIds = [];
 var startTime = new Date().getTime();
 
 page.onResourceReceived = function (response) {
-    if(requestIds.indexOf(response.id) !== -1) {
-        lastReceived = new Date().getTime();
-        responseCount++;
-        requestIds[requestIds.indexOf(response.id)] = null;
-    }
+  if(requestIds.indexOf(response.id) !== -1) {
+    lastReceived = new Date().getTime();
+    responseCount++;
+    requestIds[requestIds.indexOf(response.id)] = null;
+  }
 };
 page.onResourceRequested = function (request) {
-    if(requestIds.indexOf(request.id) === -1) {
-        requestIds.push(request.id);
-        requestCount++;
-    }
+  if(requestIds.indexOf(request.id) === -1) {
+    requestIds.push(request.id);
+    requestCount++;
+  }
 };
 
 // Open the page
@@ -29,6 +29,7 @@ var checkComplete = function () {
   // don't return until all requests are finished
   if((new Date().getTime() - lastReceived > 300 && requestCount === responseCount) || new Date().getTime() - startTime > 10000)  {
     clearInterval(checkCompleteInterval);
+    console.log(page.content);
     phantom.exit();
   }
 }
