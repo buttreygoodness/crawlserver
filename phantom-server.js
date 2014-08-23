@@ -29,7 +29,6 @@ var checkComplete = function () {
   // don't return until all requests are finished
   if((new Date().getTime() - lastReceived > 300 && requestCount === responseCount) || new Date().getTime() - startTime > 10000)  {
     clearInterval(checkCompleteInterval);
-    console.log(page.content);
     phantom.exit();
   }
 }
