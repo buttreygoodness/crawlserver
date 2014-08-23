@@ -3,6 +3,7 @@ var app = express();
 var PORT = process.env.PORT || 8888;
 
 var getContent = function(url, callback) {
+  console.log('getContent', url);
   var content = '';
   // Here we spawn a phantom.js process, the first element of the 
   // array is our phantomjs script and the second element is our url 
