@@ -4,6 +4,7 @@ var PORT = process.env.PORT || 8888;
 
 var getContent = function(url, callback) {
   console.log('getContent', url);
+
   var content = '';
   // Here we spawn a phantom.js process, the first element of the 
   // array is our phantomjs script and the second element is our url 
@@ -23,6 +24,7 @@ var getContent = function(url, callback) {
     if (code !== 0) {
       console.log('We have an error');
     } else {
+      console.log(content);
       // once our phantom.js script exits, let's call out call back
       // which outputs the contents to the page
       callback(content);
