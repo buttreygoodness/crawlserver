@@ -18,8 +18,8 @@ var sendContent = function (url, res) {
 
 };
 
-var getContent = function(url, callback) {
-  console.log('Getting content for ' + url);
+var getContent = function(url, req, callback) {
+  console.log('User-Agent: ' + req.headers['user-agent'] + ' URL: ' + url);
 
   var content = '';
   // Here we spawn a phantom.js process, the first element of the 
@@ -53,7 +53,7 @@ var respond = function (req, res) {
     return sendContent(url, res);
   }
 
-  getContent(url, function (content) {
+  getContent(url, req, function (content) {
     res.send(content);
   });
 }
