@@ -25,7 +25,7 @@ page.onResourceRequested = function (request) {
 page.open(system.args[1], function () {});
 
 var checkComplete = function () {
-  // We don't allow it to take longer than 5 seconds but
+  // We don't allow it to take longer than 10 seconds but
   // don't return until all requests are finished
   if((new Date().getTime() - lastReceived > 300 && requestCount === responseCount) || new Date().getTime() - startTime > 10000)  {
     clearInterval(checkCompleteInterval);
