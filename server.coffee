@@ -38,7 +38,7 @@ respond = (req, res) ->
 
     return res.send cached if cached
 
-    if /css|js|txt|png|ico|gif|jpg|woff|ttf|svg$/.test url
+    if /css|js|txt|png|ico|gif|jpg|woff|ttf|svg|xml$/.test url
       request url, (err, response, body) ->
         cache.set(req.path, body, 36000).then () ->
           res.send(body).end()
