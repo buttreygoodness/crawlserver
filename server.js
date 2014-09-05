@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var Car = require('car');
 var app = express();
 var PORT = process.env.PORT || 8888;
 
@@ -48,6 +49,13 @@ var getContent = function(url, req, callback) {
 var respond = function (req, res) {
   var webhost = process.env.webhost || 'local.host:3000'; 
   url = 'http://' + webhost + req.params[0];
+
+  cache = new Car.Cache('memory');
+
+  cache.get(req.path)
+    .then(function (cached) {
+      console.log (cached);
+    });
 
   if (/^\/assets\/.*/.test(req.params[0])) {
     return sendContent(url, res);

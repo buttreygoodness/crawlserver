@@ -13,9 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "car": "git+https://github.com/rstone770/car.git#development",
+    "coffee-script": "^1.8.0",
     "express": "^4.8.5",
-    "node-phantom": "^0.2.5",
-    "phantomjs": "^1.9.7-15",
-    "request": "^2.40.0"
+    "request": "^2.40.0",
+    "underscore": "^1.7.0"
   }
 }
