@@ -1,12 +1,13 @@
 _ = require 'underscore'
+car = require 'car'
 express = require 'express'
-MemoryCache = require './MemoryCache'
-PORT = process.env.PORT or 8888
 request = require 'request'
+
+PORT = process.env.PORT or 8888
 WEBHOST = process.env.webhost || 'local.host:3000'
 
+cache = car.cache 'Memory'
 app = do express
-mc = new MemoryCache
 
 getContent = (url, callback) ->
 
@@ -28,20 +29,22 @@ getContent = (url, callback) ->
 respond = (req, res) ->
 
   url = 'http://' + WEBHOST + req.params[0]
+  
+  cache.get req.path
+  .then (cached) ->
 
-  mc.get req.path, (exists, cached) ->
-    if cached then return res.send cached
+    console.log req.path + ' -> ' + req.headers['user-agent']
 
-    if /css|js|txt|png|ico$/.test url
-      return request url, (err, response, body) ->
-        mc.set req.path, body, 1000000, () ->
-          res.send body
+    return res.send cached if cached
 
+    if /css|js|txt|png|ico|gif|jpg$/.test url
+      request url, (err, response, body) ->
+        cache.set(req.path, body, 36000).then () ->
+          res.send(body).end()
     else
-      return getContent url, (html) ->
-        mc.set req.path, html, 1000000, () ->
-          res.send html
-
+      getContent url, (html) ->
+        cache.set(req.path, html, 36000).then () ->
+          res.send(html).end()
 
 console.log 'crawlserver listening on port ' + PORT
 
