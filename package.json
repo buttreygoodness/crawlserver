@@ -2,13 +2,14 @@
   "name": "crawlserver",
   "version": "1.0.0",
   "description": "Server designed for serving pull pages to web crawlers.",
-  "main": "index.js",
+  "main": "coffee server.coffee",
   "engines": {
     "node": "0.10.x",
     "npm": "1.3.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "coffee server.coffee"
   },
   "author": "",
   "license": "ISC",
