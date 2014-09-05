@@ -1,5 +1,6 @@
 _ = require 'underscore'
 car = require 'car'
+cheerio = require 'cheerio'
 express = require 'express'
 request = require 'request'
 
@@ -37,14 +38,19 @@ respond = (req, res) ->
 
     return res.send cached if cached
 
-    if /css|js|txt|png|ico|gif|jpg$/.test url
+    if /css|js|txt|png|ico|gif|jpg|woff|ttf|svg$/.test url
       request url, (err, response, body) ->
         cache.set(req.path, body, 36000).then () ->
           res.send(body).end()
     else
       getContent url, (html) ->
-        cache.set(req.path, html, 36000).then () ->
-          res.send(html).end()
+        $ = cheerio.load html
+        do $('script').remove
+        
+        htmlCache = $.html()
+
+        cache.set(req.path, htmlCache, 36000).then () ->
+          res.send(htmlCache).end()
 
 console.log 'crawlserver listening on port ' + PORT
 
