@@ -1,7 +1,0 @@
-{
-  "ignoreSslErrors": true,
-  "diskCacheEnabled": true,
-  "maxDiskCacheSize": 1000,
-  "autoLoadImages": false
-  "proxy": "local.host:3000"
-}
