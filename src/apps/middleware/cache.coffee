@@ -1,5 +1,6 @@
-_   = require 'lodash'
-car = require 'car'
+_       = require 'lodash'
+car     = require 'car'
+colors  = require 'colors'
 
 module.exports = (app) ->
   cache = app.get 'cache'
@@ -17,6 +18,10 @@ module.exports = (app) ->
     req.cache.get req.from
       .then (result) ->
         if result
+          req.log "Cache Hit on #{req.from.yellow}"
+
           do res.send(result).end
         else
+          req.log "Cache Miss on #{req.from.yellow}"
+
           do next

@@ -5,4 +5,7 @@ module.exports =
   "transport": "Casper",
   "transport from": "http://0.0.0.0:3000",
   "transport filter": ["script"],
-  "assets capture": [""]
+  "assets capture": [""],
+
+  "log": (message) ->
+    console.log "[#{Date.now()}]: #{message}"

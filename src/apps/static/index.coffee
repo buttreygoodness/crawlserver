@@ -5,6 +5,8 @@ module.exports = (app) ->
 
   filter = app.get 'transport filter'
 
+  ttl = app.get 'cache for'
+
   if not transport
     return
 
@@ -16,6 +18,8 @@ module.exports = (app) ->
     transporter.get(req.from).then (html) ->
       filtered = htmlFilter html, filter
 
-      req.cache.set req.from, filtered, 3600
+      req.cache.set req.from, filtered, ttl
+
+      req.log "Cached #{req.from.yellow} for #{ttl}s"
 
       res.send(filtered).end

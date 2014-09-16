@@ -20,21 +20,27 @@ module.exports =
       @app = app or do express
 
       do @_populateOptions
-      do @_bind
       do @_mount
 
-    start: (port) ->
+    listen: (port) ->
       @app.set 'port', port or @app.get 'port'
 
-      @app.listen @app.get 'port'
+      server = @app.listen @app.get 'port'
+
+      @_bindServer server
+
+      server
+
+    _mount: () ->
+      routes @app
 
     _populateOptions: () ->
       for key, value of @options
         @app.set key, value
 
-    _bind: () ->
-      @app.on 'listening', () ->
-        console.log ':)'
+    _bindServer: (server) ->
+      self = @
 
-    _mount: () ->
-      routes @app
+      server.on 'listening', () ->
+        console.log "Crawlserver running on port: #{self.app.get('port').toString().green}"
+
