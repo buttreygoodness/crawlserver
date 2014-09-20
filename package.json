@@ -2,7 +2,7 @@
   "name": "crawlserver",
   "version": "1.0.0",
   "description": "Server designed for serving pull pages to web crawlers.",
-  "main": "coffee server.coffee",
+  "main": "node server.js",
   "repository": "https://github.com/buttreygoodness/crawlserver.git",
   "engines": {
     "node": "0.10.x",
@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "coffee server.coffee"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
