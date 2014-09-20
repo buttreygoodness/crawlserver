@@ -7,6 +7,4 @@ cs = new Crawlserver({
   "transport from": WEBHOST
 });
 
-console.log(process.env);
-
 cs.listen(PORT);
