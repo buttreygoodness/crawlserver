@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "crawlserver": "git+https://github.com/rstone770/crawlserver.git"
+    "crawlserver": "git+https://github.com/rstone770/crawlserver.git",
+    "phantomjs": "^1.9.9"
   }
 }
